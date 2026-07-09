@@ -3,7 +3,7 @@ import { step } from "allure-js-commons";
 import { Account, Balance, createAccount, topUpAccount } from "../api/payments";
 
 export async function createAccountStep(userId: string): Promise<Account> {
-  return step("Create user account", async () => {
+  return step("Создать новый аккаунт", async () => {
     const response = await createAccount(userId);
 
     expect(response.status).toBe(201);
@@ -18,7 +18,7 @@ export async function topUpAccountStep(
   userId: string,
   amount: number,
 ): Promise<Balance> {
-  return step(`Top up account to ${amount}`, async () => {
+  return step(`Пополнить аккаунт на ${amount}`, async () => {
     const response = await topUpAccount(userId, amount);
 
     expect(response.status).toBe(200);

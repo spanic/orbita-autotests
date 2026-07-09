@@ -17,6 +17,7 @@ yarn-error.log*
 allure-results/
 allure-report/
 coverage/
+allure-history.jsonl
 
 # OS files
 .DS_Store

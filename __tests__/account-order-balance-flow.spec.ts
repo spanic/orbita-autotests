@@ -9,7 +9,7 @@ import { createAccountStep, topUpAccountStep } from "../src/steps/payments";
 const TOP_UP_AMOUNT = 1000;
 
 it(
-  "account balance reflects order withdrawal after top-up",
+  "Баланс аккаунта корректно обновляется после списания средств за заказ",
   async () => {
     const userId = faker.string.uuid();
 
@@ -18,7 +18,7 @@ it(
 
     const order = await placeArchiveOrderStep(userId);
 
-    await step("Validate account balance after withdrawal", async () => {
+    await step("Проверить баланс аккаунта после списания средств", async () => {
       await new Promise((resolve) =>
         setTimeout(resolve, DEFAULT_PROCESSING_DELAY_MS),
       );

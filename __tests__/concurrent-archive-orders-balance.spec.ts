@@ -10,7 +10,7 @@ import { createAccountStep, topUpAccountStep } from "../src/steps/payments";
 const TOP_UP_AMOUNT = 1000;
 
 it(
-  "both concurrent orders are paid and balance reflects both withdrawals",
+  "Оба заказа оплачиваются и баланс корректно обновляется после списания средств за них",
   async () => {
     const userId = faker.string.uuid();
 
@@ -18,7 +18,7 @@ it(
     await topUpAccountStep(userId, TOP_UP_AMOUNT);
 
     const orders = await step(
-      "Place two concurrent archive orders",
+      "Одновременно разместить два заказа на архивные снимки",
       async () => {
         const [firstResponse, secondResponse] = await Promise.all([
           placeArchiveOrder(userId),
@@ -35,7 +35,7 @@ it(
       },
     );
 
-    await step("Validate both orders are paid", async () => {
+    await step("Проверить, что оба заказа были оплачены", async () => {
       await new Promise((resolve) =>
         setTimeout(resolve, DEFAULT_PROCESSING_DELAY_MS),
       );
@@ -49,7 +49,7 @@ it(
     });
 
     await step(
-      "Validate account balance reflects both withdrawals",
+      "Проверить, что баланс аккаунта корректно обновляется после списания средств за оба заказа",
       async () => {
         const totalPrice = orders.reduce((sum, order) => sum + order.price, 0);
         const response = await getAccountBalance(userId);

@@ -1,18 +1,20 @@
 {
-  "name": "jest",
+  "name": "orbita-autotests",
   "version": "1.0.0",
-  "description": "",
+  "description": "🛰️ Orbita application autotests (Jest + Allure)",
   "scripts": {
-    "pretest": "rimraf ./allure-results",
-    "test": "jest"
+    "pretest": "rimraf ./allure-results ./allure-report",
+    "test": "node scripts/run-tests.js",
+    "report:open": "allure open ./allure-report"
   },
   "keywords": [],
-  "author": "",
+  "author": "Andrei Sadulin <andrei.a.sadulin@gmail.com>",
   "license": "ISC",
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
     "@jest/globals": "^30.4.1",
     "@types/node": "^26.1.1",
+    "allure": "^3.14.2",
     "allure-jest": "^3.10.2",
     "allure-js-commons": "^3.10.2",
     "axios": "^1.18.1",

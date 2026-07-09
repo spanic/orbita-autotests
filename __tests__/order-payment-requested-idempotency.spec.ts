@@ -13,7 +13,7 @@ import { createAccountStep, topUpAccountStep } from "../src/steps/payments";
 const TOP_UP_AMOUNT = 1000;
 
 it(
-  "balance is debited only once when the same order_id is requested twice",
+  "Баланс корректно обновляется только один раз при повторной отправке события OrderPaymentRequested",
   async () => {
     const userId = faker.string.uuid();
 
@@ -23,7 +23,7 @@ it(
     const order = await placeArchiveOrderStep(userId);
 
     await step(
-      "Send OrderPaymentRequested twice with the same order_id",
+      "Отправить событие OrderPaymentRequested снова с тем же order_id",
       async () => {
         const producer = await createOrderPaymentProducer();
 
@@ -41,7 +41,7 @@ it(
       },
     );
 
-    await step("Validate balance was debited only once", async () => {
+    await step("Проверить, что баланс был списан только один раз", async () => {
       await new Promise((resolve) =>
         setTimeout(resolve, DEFAULT_PROCESSING_DELAY_MS),
       );

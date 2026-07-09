@@ -10,7 +10,7 @@ import { createAccountStep, topUpAccountStep } from "../src/steps/payments";
 const TOP_UP_AMOUNT = 50;
 
 it(
-  "order is rejected and balance stays unchanged when balance is insufficient",
+  "Заказ отклоняется и баланс остается неизменным, когда средств недостаточно",
   async () => {
     const userId = faker.string.uuid();
 
@@ -18,7 +18,7 @@ it(
     await topUpAccountStep(userId, TOP_UP_AMOUNT);
 
     const orderId = await step(
-      "Place an archive order priced above the account balance",
+      "Разместить заказ на архивный снимок, цена которого превышает текущийбаланс аккаунта",
       async () => {
         const response = await placeArchiveOrder(userId);
 
@@ -30,7 +30,7 @@ it(
       },
     );
 
-    await step("Validate order payment fails", async () => {
+    await step("Проверить, что заказ не был оплачен", async () => {
       await new Promise((resolve) =>
         setTimeout(resolve, DEFAULT_PROCESSING_DELAY_MS),
       );
@@ -41,12 +41,15 @@ it(
       expect(response.data.failure_reason).toBe("INSUFFICIENT_BALANCE");
     });
 
-    await step("Validate account balance remains unchanged", async () => {
-      const response = await getAccountBalance(userId);
+    await step(
+      "Проверить, что баланс аккаунта остался неизменным",
+      async () => {
+        const response = await getAccountBalance(userId);
 
-      expect(response.status).toBe(200);
-      expect(response.data.balance).toBe(TOP_UP_AMOUNT);
-    });
+        expect(response.status).toBe(200);
+        expect(response.data.balance).toBe(TOP_UP_AMOUNT);
+      },
+    );
   },
   DEFAULT_PROCESSING_DELAY_MS + 5000,
 );

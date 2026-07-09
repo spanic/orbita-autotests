@@ -12,7 +12,7 @@ export function placeArchiveOrder(userId: string) {
 }
 
 export async function placeArchiveOrderStep(userId: string): Promise<Order> {
-  return step("Place an archive order", async () => {
+  return step("Разместить заказ на архивный снимок", async () => {
     const response = await placeArchiveOrder(userId);
 
     expect(response.status).toBe(201);
