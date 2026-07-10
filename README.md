@@ -2,6 +2,8 @@
 
 Автотесты для основных E2E-сценариев платформы Orbita Market.
 
+🛰️ ✨ Ссылка: [orbita-market-allure-report.s3-website.cloud.ru](https://orbita-market-allure-report.s3-website.cloud.ru/)
+
 ## Технологии
 
 | Технология                                    | Роль                                     |
